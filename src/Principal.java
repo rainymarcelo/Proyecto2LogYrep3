@@ -6,29 +6,6 @@ import java.awt.*;
 public class Principal {
     public static void main(String[] args) {
 
-        String r = "a,b,j,c,h,i,k,d,e,f,g,l,m,n,o";
-        String[] x = r.split(",");
-
-        char[] raiz = new char[x.length + 1];
-        for (int i = 0; i < x.length; i++) {
-            raiz[i + 1] = x[i].charAt(0);
-        }
-
-        System.out.println(raiz.length);
-        String coreccion = "";
-        for (int i = 1; i < raiz.length; i++) {
-            coreccion += raiz[i] + " ";
-        }
-        System.out.println(coreccion);
-
-        ArbolBinario binario = new ArbolBinario(raiz);
-
-        System.out.println(binario.mostrarInorden(binario.getRaiz()));
-
-        System.out.println(binario.mostrarPreorden(binario.getRaiz()));
-
-        System.out.println(binario.mostrarPosorden(binario.getRaiz()));
-
         int kLG, kA, kAB, kABB;
         ListaGeneralizada[] listaLG = new ListaGeneralizada[100];
         kLG = 1;
@@ -80,7 +57,7 @@ public class Principal {
                         switch (opcionLG) {
                             case "1"://constuctpr
                                 String datosLG = JOptionPane.showInputDialog("ingrese la lista generalizada(ponga especial" +
-                                        "atencion a las comas,´(´ y ´)´)");
+                                        "atencion a las comas,´(´ y ´)´, no use espacios)");
                                 ListaGeneralizada lG = new ListaGeneralizada(datosLG);
                                 listaLG[kLG] = lG;
                                 kLG++;
@@ -131,7 +108,7 @@ public class Principal {
 
                             case "1"://constructor
                                 String datosA=JOptionPane.showInputDialog("ingrese el arbol(ponga especial" +
-                                        "atencion a las comas,´(´ y ´)´)");
+                                        "atencion a las comas,´(´ y ´)´no use espacios)");
                                 Arbol arbol=new Arbol(datosA);
                                 listaArbol[kA]=arbol;
                                 kA++;
@@ -194,6 +171,74 @@ public class Principal {
                 case "3":
                     do {
                         opcionAB = JOptionPane.showInputDialog(menuAB);
+
+                        switch (opcionAB){
+
+                            case "1"://contructor arbol aleatorio
+                                String digitos="abcdefghijklmnopqrsyuvwxyz";
+                                String[] cambio=digitos.split("");
+
+                                char[] abecedario = new char[cambio.length + 1];
+                                for (int i = 1; i < abecedario.length; i++) {
+                                    abecedario[i] = cambio[i-1].charAt(0);
+                                }
+
+                                int tamano=(int)(Math.random()*40)+1;
+                                char[] raiz= new char[tamano];
+                                for (int i=1;i<tamano;i++){
+                                    int dato=(int)(Math.random()*abecedario.length);
+                                    if (dato==0){
+                                        dato=1;
+                                    }
+                                    raiz[i]=abecedario[dato];
+                                }
+
+                                ArbolBinario arbolBinario=new ArbolBinario(raiz);
+                                listaArbolBinario[kAB]=arbolBinario;
+                                kAB++;
+                                JOptionPane.showMessageDialog(null,arbolBinario.mostrarInorden(arbolBinario.getRaiz()));
+                                break;
+
+                            case "2"://contruir arbol binario de busqueda
+                                String datos=JOptionPane.showInputDialog("ingrese los datos del arbol binario de busqueda(no use espacios)");
+                                String[] dato=datos.split("");
+                                ArbolBinario arbolBinarioBusqueda=new ArbolBinario();
+                                for (int i=0;i<dato.length;i++){
+                                    if (arbolBinarioBusqueda.buscarDato(arbolBinarioBusqueda.getRaiz(),dato[i].charAt(0))==false){
+                                        System.out.println(arbolBinarioBusqueda.buscarDato(arbolBinarioBusqueda.getRaiz(),dato[i].charAt(0)));
+                                        arbolBinarioBusqueda.ArbolBinarioBusqueda(dato[i].charAt(0));
+                                    }
+                                }
+                                listaABB[kABB]=arbolBinarioBusqueda;
+                                kABB++;
+                                JOptionPane.showMessageDialog(null,arbolBinarioBusqueda.mostrarInorden(arbolBinarioBusqueda.getRaiz()));
+                                break;
+
+                            case "3"://mostrar arboles binarios
+                                String mostrarAB="Arboles binarios:\n";
+                                for (int i=1;i<kAB;i++){
+                                    mostrarAB+="\nArbol binario #"+i+"\n" +
+                                            "Forma inorden\n" +
+                                            listaArbolBinario[i].mostrarInorden(listaArbolBinario[i].getRaiz())+"\n" +
+                                            "Forma preorden\n" +
+                                            listaArbolBinario[i].mostrarPreorden(listaArbolBinario[i].getRaiz())+"\n"+
+                                            "Forma posorden\n" +
+                                            listaArbolBinario[i].mostrarPosorden(listaArbolBinario[i].getRaiz())+"\n";
+                                }
+                                mostrarAB+="\nArboles binarios de busqueda:\n";
+                                for (int i=1;i<kABB;i++){
+                                    mostrarAB+="\nArbol binario de busqueda #"+i+"\n" +
+                                            "Forma inorden\n" +
+                                            listaABB[i].mostrarInorden(listaABB[i].getRaiz())+"\n" +
+                                            "Forma preorden\n" +
+                                            listaABB[i].mostrarPreorden(listaABB[i].getRaiz())+"\n"+
+                                            "Forma posorden\n" +
+                                            listaABB[i].mostrarPosorden(listaABB[i].getRaiz())+"\n";
+                                }
+                                JOptionPane.showMessageDialog(null,mostrarAB);
+
+                                break;
+                        }
 
                     } while (!opcionAB.equals("6"));
                     break;

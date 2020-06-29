@@ -20,7 +20,7 @@ public class ArbolBinario {
         if (iz<datos.length){
             x.setLi(constructor(datos,iz));
         }
-        if (de<=datos.length){
+        if (de<datos.length){
             x.setLd(constructor(datos,de));
         }
         return x;
@@ -127,7 +127,21 @@ public class ArbolBinario {
         return Math.max(altizq,altder)+1;
     }
 
-    
+    public boolean buscarDato(NodoDoble r,char d){
+        boolean esta=false;
+        if (r!=null){
+            if (r.getDato()==d){
+                esta= true;
+            }
+            else {
+                esta=buscarDato(r.getLd(),d);
+                if (esta==false){
+                    esta=buscarDato(r.getLi(),d);
+                }
+            }
+        }
+        return esta;
+    }
 
 
 }
