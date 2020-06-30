@@ -1,4 +1,6 @@
 public class ArbolBinario {
+    /*  MARCELO DE LA HOZ SIERRA CC 1037669479
+     */
     NodoDoble raiz = null;
 
 
@@ -33,10 +35,19 @@ public class ArbolBinario {
             }
             else {
                 q=(NodoLG)p.getDato();
-                ArbolBinario recursivo=new ArbolBinario();
-                recursivo.parseArbolBinario(q);
-                x.setLd(recursivo.getRaiz());
-                p=p.getLiga();
+                if (x==raiz){
+                    ArbolBinario recursivo=new ArbolBinario();
+                    recursivo.parseArbolBinario(q);
+                    x.setLi(recursivo.getRaiz());
+                    p=p.getLiga();
+                    x=x.getLi();
+                }
+                else {
+                    ArbolBinario recursivo=new ArbolBinario();
+                    recursivo.parseArbolBinario(q);
+                    x.setLd(recursivo.getRaiz());
+                    p=p.getLiga();
+                }
             }
         }
 
@@ -179,6 +190,35 @@ public class ArbolBinario {
         return esta;
     }
 
+    public int hojasParse(NodoDoble r){
+        int hh=0;
+        if (r!=null){
+            if (r.getLi()==null){
+                hh+=1;
+            }
+            else {
+                hh+=hojasParse(r.getLi());
+                hh+=hojasParse(r.getLd());
+            }
+        }
+        return hh;
+    }
+
+    public int alturaParse(NodoDoble r){
+        int altizq,altder;
+        if(r==null){
+            return 0;
+        }
+        altizq=0;
+        altder=0;
+        if (r.getLi()!=null){
+            altizq=altura(r.getLi());
+        }
+        if (r.getLd()!=null){
+            altder=altura(r.getLd());
+        }
+        return Math.max(altizq,altder)+1;
+    }
 
 
 }

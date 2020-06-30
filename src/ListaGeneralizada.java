@@ -3,6 +3,8 @@ import org.omg.CORBA.NO_IMPLEMENT;
 import java.util.Stack;
 
 public class ListaGeneralizada {
+    /*  MARCELO DE LA HOZ SIERRA CC 1037669479
+     */
 
     private  NodoLG primero=null;
     private  NodoLG ultimo=primero;

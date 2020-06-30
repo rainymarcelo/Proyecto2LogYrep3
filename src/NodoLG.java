@@ -1,4 +1,6 @@
 public class NodoLG {
+    /*  MARCELO DE LA HOZ SIERRA CC 1037669479
+     */
     private int sw;
     private Object dato;
     private NodoLG liga;

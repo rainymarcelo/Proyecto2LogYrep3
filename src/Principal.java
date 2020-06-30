@@ -5,8 +5,10 @@ import java.awt.*;
 
 public class Principal {
     public static void main(String[] args) {
+        /*  MARCELO DE LA HOZ SIERRA CC 1037669479
+         */
 
-        int kLG, kA, kAB, kABB;
+        int kLG, kA, kAB, kABB,kLP;
         ListaGeneralizada[] listaLG = new ListaGeneralizada[100];
         kLG = 1;
         Arbol[] listaArbol = new Arbol[100];
@@ -15,6 +17,8 @@ public class Principal {
         kAB = 1;
         ArbolBinario[] listaABB = new ArbolBinario[100];
         kABB = 1;
+        ArbolBinario[] listaParse=new ArbolBinario[100];
+        kLP=1;
 
         String menuPrincipal = "En todos los metodos de contruccion en los que ingrese datos, seran de un solo digito\n" +
                 "1.\tListas generalizadas\n" +
@@ -34,13 +38,15 @@ public class Principal {
                 "5. Determinar si los datos son primos\n" +
                 "6. Construir arbol n-ario como binario, muestra la altura,\n" +
                 "    cantidad de hojas y grado de el arbol binario creado\n" +
+                "   (genera bien el arbol binario, problemas en encontrar los\n" +
+                "    otros datos, solucionar)" +
                 "7. Volver";
 
         String menuAB = "1. Construir arbol binario aleatorio\n" +
                 "2. Construir arbol binario de busqueda\n" +
                 "3. Mostrar recorridos inorden, posorden y preorden de los arboles binarios\n" +
-                "4. Mostrar distancia entre cada par de hojas del arbol binario\n" +
-                "5. Mostrar distancia entre dos datos seleccionados\n" +
+                "4. Mostrar distancia entre cada par de hojas del arbol binario(incompleto)\n" +
+                "5. Mostrar distancia entre dos datos seleccionados(incompleto)\n" +
                 "6. Volver";
 
         String opcionPrincipal, opcionLG, opcionA, opcionAB;
@@ -217,7 +223,13 @@ public class Principal {
                                         mostrarArbole += "Arbol #" + (i) + "\n" +
                                                 listaArbol[i].muestrArbol(listaArbol[i].getPrimero(), 0) + "\n\n";
                                     }
-                                    int numeroPrimos = Integer.parseInt(JOptionPane.showInputDialog(mostrarArbole));
+                                    int numeroParse = Integer.parseInt(JOptionPane.showInputDialog(mostrarArbole));
+                                    ArbolBinario parse= new ArbolBinario();
+                                    parse.parseArbolBinario(listaArbol[numeroParse].getPrimero());
+                                    JOptionPane.showMessageDialog(null,parse.mostrarInorden(parse.getRaiz())+"\n" +
+                                                    "La cantidad de hojas es de: "+parse.hojasParse(parse.getRaiz())+"\n" +
+                                            "La altura es de: "+parse.alturaParse(parse.getRaiz()
+                                    ));
                                 }
                                 break;
 

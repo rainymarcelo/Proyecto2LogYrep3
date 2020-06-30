@@ -4,6 +4,8 @@ import sun.applet.AppletIllegalArgumentException;
 import java.util.Stack;
 
 public class Arbol {
+    /*  MARCELO DE LA HOZ SIERRA CC 1037669479
+     */
 
     private NodoLG primero=new NodoLG(null);
     private NodoLG ultimo;
