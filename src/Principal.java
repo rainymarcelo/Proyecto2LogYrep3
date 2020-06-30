@@ -30,7 +30,7 @@ public class Principal {
         String menuA = "1. Contructor\n" +
                 "2. Mostrar arboles\n" +
                 "3. Copiar arbol\n" +
-                "4. Altura,grado y camtidad de hojas de un arbol\n" +
+                "4. Altura,grado y cantidad de hojas de un arbol\n" +
                 "5. Determinar si los datos son primos\n" +
                 "6. Construir arbol n-ario como binario, muestra la altura,\n" +
                 "    cantidad de hojas y grado de el arbol binario creado\n" +
@@ -115,6 +115,7 @@ public class Principal {
                                 JOptionPane.showMessageDialog(null,arbol.muestrArbol(arbol.getPrimero(),0));
                                 break;
 
+
                             case "2"://mostrar arboles
                                 if (kA != 1) {
                                     String mostrarArbole = "";
@@ -162,6 +163,65 @@ public class Principal {
                                 else {
                                     JOptionPane.showMessageDialog(null,"No ha ingresado ningun arbol");
                                 }
+
+                                break;
+
+                            case "5"://datos primos
+                                if (kA != 1) {
+                                    String mostrarArbole = "Seleccione el arbol a copiar\n";
+                                    for (int i = 1; i < kA; i++) {
+                                        mostrarArbole += "Arbol #" + (i) + "\n" +
+                                                listaArbol[i].muestrArbol(listaArbol[i].getPrimero(),0)+"\n\n";
+                                    }
+                                    int numeroPrimos=Integer.parseInt(JOptionPane.showInputDialog(mostrarArbole));
+
+                                    String primo=JOptionPane.showInputDialog("ingrese los dos datos a evaluar si son primos(separados por una coma)");
+                                    String[] primos=primo.split(",");
+                                    if (listaArbol[numeroPrimos].getPrimero().getDato().equals(primos[0]) || listaArbol[numeroPrimos].getPrimero().getDato().equals(primos[1]) ){
+                                        JOptionPane.showMessageDialog(null,"uno de los datos es la raiz por lo tanto no son primos");
+                                        break;
+                                    }
+                                    if (primos[0].equals(primos[1])){
+                                        JOptionPane.showMessageDialog(null,"los datos a evaluar son igulaes por lo tanto no son primos");
+                                        break;
+                                    }
+                                    if (listaArbol[numeroPrimos].padre(primos[0])==null){
+                                        JOptionPane.showMessageDialog(null,"el dato "+primos[0]+" no esta en el arbol");
+                                        break;
+                                    }
+                                    if (listaArbol[numeroPrimos].padre(primos[1])==null){
+                                        JOptionPane.showMessageDialog(null,"el dato "+primos[1]+" no esta en el arbol");
+                                        break;
+                                    }
+                                    if (listaArbol[numeroPrimos].padre(primos[0])==listaArbol[numeroPrimos].padre(primos[1])){
+                                        System.out.println(listaArbol[numeroPrimos].padre(primos[0]).getDato());
+                                        System.out.println(listaArbol[numeroPrimos].padre(primos[1]).getDato());
+                                        JOptionPane.showMessageDialog(null,"Los datos son hermanos");
+                                        break;
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"son primos");
+                                    }
+
+
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(null,"No ha ingresado ningun arbol");
+                                }
+                                break;
+
+                            case"6"://convertir arbol n-ario a binario
+                                if (kA != 1) {
+                                    String mostrarArbole = "Seleccione el arbol a copiar\n";
+                                    for (int i = 1; i < kA; i++) {
+                                        mostrarArbole += "Arbol #" + (i) + "\n" +
+                                                listaArbol[i].muestrArbol(listaArbol[i].getPrimero(), 0) + "\n\n";
+                                    }
+                                    int numeroPrimos = Integer.parseInt(JOptionPane.showInputDialog(mostrarArbole));
+                                }
+                                break;
+
+                            case "7":
                                 break;
                         }
 
@@ -238,6 +298,19 @@ public class Principal {
                                 JOptionPane.showMessageDialog(null,mostrarAB);
 
                                 break;
+
+                            case "4"://distancia hojas
+
+
+                                break;
+
+                            case "5"://distancia entre 2 datos seleccionados
+
+
+                                break;
+
+                            case"6":
+                                break;
                         }
 
                     } while (!opcionAB.equals("6"));
@@ -249,5 +322,7 @@ public class Principal {
             }
 
         } while (!opcionPrincipal.equals("4"));
+
+
     }
 }

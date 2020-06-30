@@ -211,5 +211,72 @@ public class Arbol {
         return copia;
     }
 
+    public NodoLG padre(String d){
+        int n=0;
+        if (primero.getDato().equals(d)){
+            return primero;
+        }
+        NodoLG p,q;
+        Pila pila=new Pila(100);
+        p=getPrimero();
+        pila.apilar(p);
+        p=p.getLiga();
+        while (p!=null){
+            if (p.getSw()==0){
+                if (p.getDato().equals(d)){
+                    return pila.desapilar();
+                }
+                p=p.getLiga();
+            }
+            else {
+                q=(NodoLG)p.getDato();
+                if (q.getDato().equals(d)){
+                    return pila.desapilar();
+                }
+                else{
+                    pila.apilar(p.getLiga());
+                    p=q.getLiga();
+                }
+            }
+            while (p==null && !pila.esVacia()){
+                p=pila.desapilar();
+            }
+        }
+        return null;
+    }
+
+    public NodoLG padreNodo(NodoLG d){
+        if (primero==d){
+            return primero;
+        }
+        NodoLG p,q;
+        Pila pila=new Pila(100);
+        p=getPrimero();
+        pila.apilar(p);
+        p=p.getLiga();
+        while (p!=null){
+            if (p.getSw()==0){
+                if (p==d){
+                    return pila.desapilar();
+                }
+                p=p.getLiga();
+            }
+            else {
+                q=(NodoLG)p.getDato();
+                if (q==d){
+                    return pila.desapilar();
+                }
+                else{
+                    pila.apilar(p.getLiga());
+                    p=q.getLiga();
+                }
+            }
+            while (p==null && !pila.esVacia()){
+                p=pila.desapilar();
+            }
+        }
+        return null;
+    }
+
 
 }

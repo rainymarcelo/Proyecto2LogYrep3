@@ -6,6 +6,42 @@ public class ArbolBinario {
 
     }
 
+    public void parseArbolBinario(NodoLG arbol){
+        if (arbol!=null){
+            String s=(String)arbol.getDato();
+            char g=s.charAt(0);
+            NodoDoble x= new NodoDoble(g);
+            raiz=x;
+        }
+        NodoDoble x=raiz;
+        NodoLG p,q;
+        p=arbol.getLiga();
+        while (p!=null){
+            if(p.getSw()==0){
+                String s=(String)p.getDato();
+                char g=s.charAt(0);
+                NodoDoble y= new NodoDoble(g);
+                if (x==raiz){
+                    x.setLi(y);
+                    x=x.getLi();
+                }
+                else {
+                    x.setLd(y);
+                    x=x.getLd();
+                }
+                p=p.getLiga();
+            }
+            else {
+                q=(NodoLG)p.getDato();
+                ArbolBinario recursivo=new ArbolBinario();
+                recursivo.parseArbolBinario(q);
+                x.setLd(recursivo.getRaiz());
+                p=p.getLiga();
+            }
+        }
+
+    }
+
     public ArbolBinario(char[] datos){
         int k=1;
         if (k<=datos.length){
@@ -142,6 +178,7 @@ public class ArbolBinario {
         }
         return esta;
     }
+
 
 
 }
